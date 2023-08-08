@@ -23,7 +23,7 @@ For caching, I've opted for dual options: memory and Redis. Memory cache acceler
 I've chosen .NET WebAPI for building RESTful APIs due to its straightforward controller creation and built-in support for the OpenAPI interface (Swagger), which facilitates convenient testing throughout the development process.
 
 ## Unit Tests
-In this assessment task project, the unit tests are specifically centered around the application domain, ensuring comprehensive coverage and validation of the core functionality.
+Within this assessment task project, the focus of the unit tests revolves specifically around the application domain. This ensures thorough coverage and validation of the core functionality. The unit tests cover a portion of the code, showcasing the tools and methodologies employed during their creation.
 
 ## Logging
 I've elected to use the Serilog logging library due to its established reputation. During development, its integration enables logs to be readily observed in the Visual Studio Output window, greatly expediting the development process. Additionally, Serilog writes logs to files, ensuring a persistent record of application activities for analysis and troubleshooting.
@@ -38,3 +38,9 @@ I've elected to use the Serilog logging library due to its established reputatio
 
 ## Getting started
 Open the "appsettings.Development.json" file and configure the API access keys for Fixer and ExchangeRatesApi. By default, during development, the application will utilize the Memory data store and cache. You can modify this behavior by following the instructions provided in the settings above.
+
+Since client authorization is not within the scope of this task, the application utilizes the client's IP address as a means of identification for this purpose.
+
+REST API endpoints:
+* /api/Exchange/Convert - converts currency
+* /api/Exchange/Trade - trades currency and saves to store

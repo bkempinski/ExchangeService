@@ -66,8 +66,8 @@ public class ExchangeService : IExchangeService
             AbsoluteExpiration = _configuration.GetValue("ExchangeRateExpiration", TimeSpan.FromMinutes(30)),
             ValueFactory = () => exchangeRateProvider.GetExchangeRateAsync(new GetExchangeRateRequest
             {
-                CurrencyTo = request.CurrencyTo,
-                CurrencyFrom = request.CurrencyFrom
+                CurrencyFrom = request.CurrencyFrom,
+                CurrencyTo = request.CurrencyTo
             })
         });
 
