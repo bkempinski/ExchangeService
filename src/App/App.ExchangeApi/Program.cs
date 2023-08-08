@@ -3,7 +3,6 @@ using App.ExchangeApi;
 var builder = WebApplication
     .CreateBuilder(args)
     .AddLogs()
-    .AddOptions()
     .AddImplementations();
 
 var app = builder.Build();

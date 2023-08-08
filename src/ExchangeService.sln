@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.EntityFramework", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.SqlServer", "Infrastructure\Data\Infrastructure.Data.SqlServer\Infrastructure.Data.SqlServer.csproj", "{C73C01B5-AA66-4060-A605-12FCF9C379DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.Sqlite", "Infrastructure\Data\Infrastructure.Data.Sqlite\Infrastructure.Data.Sqlite.csproj", "{E1C530E6-29BE-472A-99C3-394E37462B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Sqlite", "Infrastructure\Data\Infrastructure.Data.Sqlite\Infrastructure.Data.Sqlite.csproj", "{E1C530E6-29BE-472A-99C3-394E37462B97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

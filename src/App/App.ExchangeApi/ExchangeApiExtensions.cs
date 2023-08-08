@@ -34,13 +34,6 @@ public static class ExchangeApiExtensions
         return builder;
     }
 
-    public static WebApplicationBuilder AddOptions(this WebApplicationBuilder builder)
-    {
-        //builder.Services.ConfigureOptions<ConfigureHostOptions>();
-
-        return builder;
-    }
-
     public static WebApplicationBuilder AddImplementations(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
@@ -55,8 +48,6 @@ public static class ExchangeApiExtensions
     {
         // Core
         services.AddCoreServices();
-
-        // App
 
         // Infrastructure
         services.AddInMemoryCache();
