@@ -2,6 +2,6 @@
 
 public record GetExchangeRateRequest
 {
-    public string Currency { get; init; }
-    public string BaseCurrency { get; init; } = "EUR";
+    public string CurrencyFrom { get; init; } = "EUR";
+    public string CurrencyTo { get; init; }
 }

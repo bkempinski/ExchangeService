@@ -12,12 +12,19 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="7.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'"  Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Services\Core.Services.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Caching\Infrastructure.Caching.Memory\Infrastructure.Caching.Memory.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Caching\Infrastructure.Caching.Redis\Infrastructure.Caching.Redis.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Data\Infrastructure.Data.Memory\Infrastructure.Data.Memory.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Data\Infrastructure.Data.Sqlite\Infrastructure.Data.Sqlite.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Data\Infrastructure.Data.SqlServer\Infrastructure.Data.SqlServer.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Providers\Infrastructure.Providers.ExchangeRatesApi\Infrastructure.Providers.ExchangeRatesApi.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Providers\Infrastructure.Providers.Fixer\Infrastructure.Providers.Fixer.csproj" />
   </ItemGroup>

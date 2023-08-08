@@ -34,16 +34,16 @@ public class FixerProvider : IExchangeRateProvider
         if (request == null)
             throw new Core.Domain.Exceptions.ArgumentNullException(nameof(request));
 
-        if (string.IsNullOrEmpty(request.Currency))
-            throw new Core.Domain.Exceptions.ArgumentNullException(nameof(request.Currency));
+        if (string.IsNullOrEmpty(request.CurrencyTo))
+            throw new Core.Domain.Exceptions.ArgumentNullException(nameof(request.CurrencyTo));
 
-        if (string.IsNullOrEmpty(request.BaseCurrency))
-            throw new Core.Domain.Exceptions.ArgumentNullException(nameof(request.BaseCurrency));
+        if (string.IsNullOrEmpty(request.CurrencyFrom))
+            throw new Core.Domain.Exceptions.ArgumentNullException(nameof(request.CurrencyFrom));
 
         if (string.IsNullOrEmpty(_options.Value?.ApiAccessKey))
             throw new Core.Domain.Exceptions.ArgumentNullException("ApiAccessKey");
 
-        var url = $"latest?access_key={_options.Value?.ApiAccessKey}&base={request.BaseCurrency}&symbols={request.Currency}&format=1";
+        var url = $"latest?access_key={_options.Value?.ApiAccessKey}&base={request.CurrencyFrom}&symbols={request.CurrencyTo}&format=1";
         var response = await _httpClient.GetFromJsonAsync<LatestResponse>(url);
 
         _logger.LogDebug($"FixerProvider -> GetExchangeRateAsync -> Response: {response}");
@@ -51,10 +51,10 @@ public class FixerProvider : IExchangeRateProvider
         if (response.Success)
             return new GetExchangeRateResponse
             {
-                Currency = request.Currency,
-                BaseCurrency = request.BaseCurrency,
+                CurrencyTo = request.CurrencyTo,
+                CurrencyFrom = request.CurrencyFrom,
                 ExchangeRate = response.Rates?
-                    .Where(r => r.Key.Equals(request.Currency, StringComparison.InvariantCultureIgnoreCase))
+                    .Where(r => r.Key.Equals(request.CurrencyTo, StringComparison.InvariantCultureIgnoreCase))
                     .Select(r => r.Value)
                     .DefaultIfEmpty(1m)
                     .FirstOrDefault() ?? 1m,

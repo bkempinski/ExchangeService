@@ -1,4 +1,7 @@
 ﻿using Core.Services;
+using Infrastructure.Data.Memory;
+using Infrastructure.Data.Sqlite;
+using Infrastructure.Data.SqlServer;
 using Infrastructure.Caching.Memory;
 using Infrastructure.Caching.Redis;
 using Infrastructure.Providers.Fixer;
@@ -58,7 +61,27 @@ public static class ExchangeApiExtensions
         // Infrastructure
         services.AddInMemoryCache();
 
-        var distributedCacheType = configuration.GetValue("DistributedCacheType", "Memory");
+        var dataStoreType = configuration.GetValue("DataStoreType", "SqlServer");
+
+        switch (dataStoreType)
+        {
+            // Memory - use for development
+            case "Memory":
+                services.AddInMemoryDataStore();
+                break;
+            // Sqlite - use for development
+            case "Sqlite":
+                services.AddSqliteDataStore();
+                break;
+            // SqlServer - use for release
+            case "SqlServer":
+                services.AddSqlServerDataStore();
+                break;
+            default:
+                throw new UnsupportedDataStoreException(dataStoreType);
+        }
+
+        var distributedCacheType = configuration.GetValue("DistributedCacheType", "Redis");
 
         switch (distributedCacheType)
         {

@@ -33,9 +33,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Infrastructure", "Sh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Caching", "Caching", "{E56DBCC3-F7E5-40E0-9318-B9F9B10CD472}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Caching.Memory", "Infrastructure\Caching\Infrastructure.Caching.Memory\Infrastructure.Caching.Memory.csproj", "{62D727BA-46F2-4236-941E-A263DDFE0BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Caching.Memory", "Infrastructure\Caching\Infrastructure.Caching.Memory\Infrastructure.Caching.Memory.csproj", "{62D727BA-46F2-4236-941E-A263DDFE0BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Caching.Redis", "Infrastructure\Caching\Infrastructure.Caching.Redis\Infrastructure.Caching.Redis.csproj", "{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Caching.Redis", "Infrastructure\Caching\Infrastructure.Caching.Redis\Infrastructure.Caching.Redis.csproj", "{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{71F7DC96-A960-40C5-9F65-40022C237F16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Memory", "Infrastructure\Data\Infrastructure.Data.Memory\Infrastructure.Data.Memory.csproj", "{54AC9949-0878-490E-AAD6-22009A5C06D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.EntityFramework", "Shared\Shared.EntityFramework\Shared.EntityFramework.csproj", "{9E60E7C1-4B79-4655-B7A6-1EA998D5A100}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.SqlServer", "Infrastructure\Data\Infrastructure.Data.SqlServer\Infrastructure.Data.SqlServer.csproj", "{C73C01B5-AA66-4060-A605-12FCF9C379DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.Sqlite", "Infrastructure\Data\Infrastructure.Data.Sqlite\Infrastructure.Data.Sqlite.csproj", "{E1C530E6-29BE-472A-99C3-394E37462B97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +97,22 @@ Global
 		{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54AC9949-0878-490E-AAD6-22009A5C06D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AC9949-0878-490E-AAD6-22009A5C06D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AC9949-0878-490E-AAD6-22009A5C06D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AC9949-0878-490E-AAD6-22009A5C06D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E60E7C1-4B79-4655-B7A6-1EA998D5A100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E60E7C1-4B79-4655-B7A6-1EA998D5A100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E60E7C1-4B79-4655-B7A6-1EA998D5A100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E60E7C1-4B79-4655-B7A6-1EA998D5A100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73C01B5-AA66-4060-A605-12FCF9C379DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73C01B5-AA66-4060-A605-12FCF9C379DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73C01B5-AA66-4060-A605-12FCF9C379DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73C01B5-AA66-4060-A605-12FCF9C379DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C530E6-29BE-472A-99C3-394E37462B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C530E6-29BE-472A-99C3-394E37462B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C530E6-29BE-472A-99C3-394E37462B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C530E6-29BE-472A-99C3-394E37462B97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +131,11 @@ Global
 		{E56DBCC3-F7E5-40E0-9318-B9F9B10CD472} = {0842C33B-FEF8-4F18-AAFC-A292364CA201}
 		{62D727BA-46F2-4236-941E-A263DDFE0BF4} = {E56DBCC3-F7E5-40E0-9318-B9F9B10CD472}
 		{CA8CEDBE-2183-4818-870D-4F90D2E5FD2D} = {E56DBCC3-F7E5-40E0-9318-B9F9B10CD472}
+		{71F7DC96-A960-40C5-9F65-40022C237F16} = {0842C33B-FEF8-4F18-AAFC-A292364CA201}
+		{54AC9949-0878-490E-AAD6-22009A5C06D4} = {71F7DC96-A960-40C5-9F65-40022C237F16}
+		{9E60E7C1-4B79-4655-B7A6-1EA998D5A100} = {EE3A87B6-2FE1-42E0-9FF3-A4D3B7735C26}
+		{C73C01B5-AA66-4060-A605-12FCF9C379DC} = {71F7DC96-A960-40C5-9F65-40022C237F16}
+		{E1C530E6-29BE-472A-99C3-394E37462B97} = {71F7DC96-A960-40C5-9F65-40022C237F16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B3F0C61-D31D-4003-9997-08660D80A23C}

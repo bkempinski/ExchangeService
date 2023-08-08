@@ -2,8 +2,8 @@
 
 public record GetExchangeRateResponse
 {
-    public string Currency { get; init; }
-    public string BaseCurrency { get; init; }
+    public string CurrencyFrom { get; init; }
+    public string CurrencyTo { get; init; }
     public decimal ExchangeRate { get; init; }
     public DateTime Date { get; init; }
 }

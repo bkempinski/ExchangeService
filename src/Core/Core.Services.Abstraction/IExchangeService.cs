@@ -5,5 +5,6 @@ namespace Core.Services.Abstraction;
 
 public interface IExchangeService
 {
-    Task<ConvertCurrencyResponse> ConvertCurrencyAsync(ConvertCurrencyRequest request);
+    Task<CurrencyConvertResponse> CurrencyConvertAsync(CurrencyConvertRequest request);
+    Task<CurrencyTradeResponse> CurrencyTradeAsync(CurrencyTradeRequest request);
 }

@@ -1,4 +1,5 @@
-﻿using Core.Services.Abstraction;
+﻿using Core.Contract.Services.Requests.ExchangeService;
+using Core.Services.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.ExchangeApi.Controllers;
@@ -9,22 +10,36 @@ public class ExchangeController : ControllerBase
 {
     private readonly IExchangeService _exchangeService;
 
-    public ExchangeController
-        (
-            IExchangeService exchangeService
-        ) => (_exchangeService)
-            = (exchangeService);
+    public ExchangeController(IExchangeService exchangeService) =>
+        _exchangeService = exchangeService;
 
-    [HttpPost]
-    public async Task<decimal> ConvertCurrencyAsync(decimal value)
+    [HttpPost("Convert")]
+    public async Task<string> ConvertCurrencyAsync(decimal value, string currencyFrom = "EUR", string currencyTo = "PLN")
     {
-        var result = await _exchangeService.ConvertCurrencyAsync(new Core.Contract.Services.Requests.ExchangeService.ConvertCurrencyRequest
+        var result = await _exchangeService.CurrencyConvertAsync(new CurrencyConvertRequest
         {
-            Currency = "PLN",
-            FromCurrency = "EUR",
-            FromValue = value
+            CurrencyFrom = currencyFrom,
+            CurrencyTo = currencyTo,
+            Value = value
         });
 
-        return result.Value;
+        return $"{value} {currencyFrom} = {result.Value} {currencyTo}";
+    }
+
+    [HttpPost("Trade")]
+    public async Task<string> TradeCurrencyAsync(decimal value, string currencyFrom = "EUR", string currencyTo = "PLN")
+    {
+        var result = await _exchangeService.CurrencyTradeAsync(new CurrencyTradeRequest
+        {
+            ClientIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+            CurrencyFrom = currencyFrom,
+            CurrencyTo = currencyTo,
+            Value = value
+        });
+
+        if (result.Success)
+            return $"OK - {result.Message}";
+        else
+            return $"ERROR - {result.Message}";
     }
 }

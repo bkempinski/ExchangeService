@@ -17,7 +17,7 @@ public class CacheService : ICacheService
     private readonly ILogger<CacheService> _logger;
     private readonly IMemoryCache _memoryCache;
     private readonly IDistributedCache _distributedCache;
-    private readonly IDistributedLockProvider _distributedLock; 
+    private readonly IDistributedLockProvider _distributedLock;
 
     public CacheService
         (
@@ -101,6 +101,64 @@ public class CacheService : ICacheService
                 }
                 else
                     throw new ArgumentNullException(nameof(request.ValueFactory));
+            }
+            else
+                throw new ArgumentNullException(nameof(lockHandle));
+        }
+    }
+
+    public Task<SetValueResponse<T>> SetValueInMemoryAsync<T>(SetValueRequest<T> request)
+    {
+        _logger.LogDebug($"CacheService -> SetValueInMemoryAsync -> Request: {request}");
+
+        if (string.IsNullOrEmpty(request.CacheKey))
+            throw new Domain.Exceptions.ArgumentNullException(nameof(request.CacheKey));
+
+        var cacheEntryOptions = new MemoryCacheEntryOptions();
+
+        if (request.AbsoluteExpiration.HasValue)
+            cacheEntryOptions.AbsoluteExpirationRelativeToNow = request.AbsoluteExpiration.Value;
+        else if (request.SlidingExpiration.HasValue)
+            cacheEntryOptions.SlidingExpiration = request.SlidingExpiration.Value;
+        else
+            _logger.LogWarning($"Cache expiration not set - CacheKey: {request.CacheKey}");
+
+        _memoryCache.Set(request.CacheKey, request.Value, cacheEntryOptions);
+
+        return Task.FromResult(new SetValueResponse<T>
+        {
+            Value = request.Value
+        });
+    }
+
+    public async Task<SetValueResponse<T>> SetValueDistributedAsync<T>(SetValueRequest<T> request)
+    {
+        _logger.LogDebug($"CacheService -> SetValueDistributedAsync -> Request: {request}");
+
+        if (string.IsNullOrEmpty(request.CacheKey))
+            throw new Domain.Exceptions.ArgumentNullException(nameof(request.CacheKey));
+
+        await using (var lockHandle = await _distributedLock.CreateLock(request.CacheKey).TryAcquireAsync(_distributedLockAcquireTimeout))
+        {
+            if (lockHandle != null)
+            {
+                var cacheEntryOptions = new DistributedCacheEntryOptions();
+
+                if (request.AbsoluteExpiration.HasValue)
+                    cacheEntryOptions.AbsoluteExpirationRelativeToNow = request.AbsoluteExpiration.Value;
+                else if (request.SlidingExpiration.HasValue)
+                    cacheEntryOptions.SlidingExpiration = request.SlidingExpiration.Value;
+                else
+                    _logger.LogWarning($"Cache expiration not set - CacheKey: {request.CacheKey}");
+
+                var cacheObjectBytes = SerializerCacheObject(request.Value);
+
+                await _distributedCache.SetAsync(request.CacheKey, cacheObjectBytes, cacheEntryOptions);
+
+                return new SetValueResponse<T>
+                {
+                    Value = request.Value
+                };
             }
             else
                 throw new ArgumentNullException(nameof(lockHandle));
